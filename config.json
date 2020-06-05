@@ -1,0 +1,9 @@
+{
+  "prefix": "!",
+  "age": 1,
+  "words": ["Hello", "Hola", "Bonjour"],
+  "bot_info": {
+    "name": "New Testing Bot",
+    "beta_version": 1.0
+  }
+}
