@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const { prefix, age, bot_info } = require('./config.json');
+const { getPokemon } = require('./poke.js');
+const { Client, MessageEmbed } = require('discord.js');
 
 client.once('ready', () => {
   console.log('Success!');
@@ -10,7 +12,7 @@ client.once('ready', () => {
 });
 
 const fortunes = {
-  cookieReadings: ['yo', 'yooo', 'yoooooo', 'oernfo', 'nfkwnfkwnejf'],
+  cookieReadings: [],
 };
 const joke = {
   jokes: [
@@ -31,7 +33,7 @@ const fortuneCookie = () =>
   fortunes.cookieReadings[Math.floor(Math.random() * 2) + 1];
 const dadjokes = () => joke.jokes[Math.floor(Math.random() * 8) + 1];
 
-client.on('message', (message) => {
+client.on('message', async (message) => {
   if (message.author.bot) {
     return;
   }
@@ -57,5 +59,24 @@ client.on('message', (message) => {
   }
   if (message.content === `${prefix}dadjoke`) {
     message.channel.send(dadjokes());
+  }
+  if (message.content.toLowerCase().startsWith('!pokemon')) {
+    const pokemon = message.content.toLowerCase().split(' ')[1];
+    try {
+      const pokeData = await getPokemon(pokemon);
+      const { sprites, stats, weight, name, id, types } = pokeData;
+      const embed = new MessageEmbed();
+      embed.setTitle(`${name} #${id}`);
+      embed.setThumbnail(`${sprites.front_default}`);
+      stats.forEach((stat) =>
+        embed.addField(stat.stat.name, stat.base_stat, true)
+      );
+      types.forEach((type) => embed.addField('Type', type.type.name, true));
+      embed.addField('Weight', weight);
+      message.channel.send(embed);
+    } catch (err) {
+      console.log(err);
+      message.channel.send(`Pokemon ${pokemon} does not exist.`);
+    }
   }
 });
