@@ -12,7 +12,15 @@ client.once('ready', () => {
 });
 
 const fortunes = {
-  cookieReadings: [],
+  cookieReadings: [
+    'A feather in the hand is better than a bird in the air.',
+    'A fresh start will put you on your way.',
+    'A hunch is creativity trying to tell you something.',
+    'A person of words and not deeds is like a garden full of weeds.',
+    'Accept something that you cannot change, and you will feel better.',
+    'The greatest danger could be your stupidity.',
+    "It's about time I got out of that cookie.",
+  ],
 };
 const joke = {
   jokes: [
