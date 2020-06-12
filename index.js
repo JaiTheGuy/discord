@@ -12,8 +12,6 @@ client.once('ready', () => {
   console.log(bot_info);
 });
 
-client.login('NzE3OTMwMjE3MDU3OTQzNTk1.XtmhCw.3a6C3ZVqATP1gXF-DVOIxrG5Agw');
-
 const fortunes = {
   cookieReadings: [
     'A feather in the hand is better than a bird in the air.',
