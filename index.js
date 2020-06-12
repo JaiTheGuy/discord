@@ -89,9 +89,11 @@ client.on('message', async (message) => {
     }
   }
   if (message.content === `${prefix}corona`) {
-    const CoronaData = await getCorona(countries);
-    const { Country, Slug } = data;
+    const coronaData = await getCorona(Country);
+    const { NewConfirmed, TotalConfirmed } = data;
     const embed = new MessageEmbed();
-    message.channel.send(`${countries}`);
+    embed.setTitle(`${Country}`);
+    embed.addField('Slug', Slug);
+    message.channel.send(embed);
   }
 });
