@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const { prefix, age, bot_info } = require('./config.json');
 const { getPokemon } = require('./poke.js');
+const { getCorona } = require('./corona.js');
 const { Client, MessageEmbed } = require('discord.js');
 
 client.once('ready', () => {
@@ -10,6 +11,8 @@ client.once('ready', () => {
   console.log(age);
   console.log(bot_info);
 });
+
+client.login('NzE3OTMwMjE3MDU3OTQzNTk1.XtmhCw.3a6C3ZVqATP1gXF-DVOIxrG5Agw');
 
 const fortunes = {
   cookieReadings: [
@@ -86,5 +89,11 @@ client.on('message', async (message) => {
       console.log(err);
       message.channel.send(`Pokemon ${pokemon} does not exist.`);
     }
+  }
+  if (message.content === `${prefix}corona`) {
+    const CoronaData = await getCorona(countries);
+    const { Country, Slug } = data;
+    const embed = new MessageEmbed();
+    message.channel.send(`${countries}`);
   }
 });
